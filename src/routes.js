@@ -3,6 +3,7 @@ import React from 'react';
 import { Switch, BrowserRouter as Router } from 'react-router-dom';
 
 import Home from './components/pages/home';
+import Detail from './components/pages/detail';
 import Route from './routes/public-routes';
 
 const Routes = () => {
@@ -10,6 +11,8 @@ const Routes = () => {
         <Router>
             <Switch>
                 <Route path="/" component={Home} exact/>
+                <Route path="/:genre/:slug" component={Detail} exact/>
+                <Route path="/:genre" component={Home} exact/>
             </Switch>    
         </Router>
     )
