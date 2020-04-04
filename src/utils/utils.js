@@ -22,9 +22,19 @@ export const getRecents = data => data.map(d => d.title).reverse();
 
 export const getCategories = data => [...new Set(data.map(d => d.genre))];
 
-export const getByGenre = (data, genre) => data.filter(d => d.genreSlug === genre);
+export const itemsWithSlug = items => ([
+  ...items.map(item => (
+      {
+          ...item, 
+          ...{slug: slugify(item.title), genreSlug: slugify(item.genre)}
+      }
+  ))
+]);
+
+export const getByGenre = (data, genre) => itemsWithSlug(data).filter(d => d.genreSlug === genre);
 
 export const getItemByGenreAndCategory = (data, title, genre) => data.find(d => slugify(d.title) === title && slugify(d.genre) === genre);
+
 
 export const groupBy = (state, propriete) => {
 	return state.reduce((grouped, obj) => {
