@@ -35,6 +35,12 @@ export const getByGenre = (data, genre) => itemsWithSlug(data).filter(d => d.gen
 
 export const getItemByGenreAndCategory = (data, title, genre) => data.find(d => slugify(d.title) === title && slugify(d.genre) === genre);
 
+export const getArticleImages = fileName => `${process.env.PUBLIC_URL}/images/articles/${fileName}`;
+
+export const getRandomArrayEveryDay = array => {
+    const day = new Date().getDay();
+    return array[day % array.length];
+}
 
 export const groupBy = (state, propriete) => {
 	return state.reduce((grouped, obj) => {

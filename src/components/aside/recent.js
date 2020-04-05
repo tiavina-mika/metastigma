@@ -4,7 +4,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 
-import { items } from '../../utils/data';
+import { items } from '../../utils/data/articles';
 import { slugify, getRecents, getCategories } from '../../utils/utils';
 
 const useStyles = makeStyles(theme => ({
@@ -21,6 +21,9 @@ const useStyles = makeStyles(theme => ({
         lineHeight: 1.8,
         '&:hover': {
             textDecoration: 'underline'
+        },
+        [theme.breakpoints.down('md')]: {
+            fontSize: 16,
         }
     },
 }));

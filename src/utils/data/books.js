@@ -1,0 +1,1 @@
+export const books = ['001.jpg'];

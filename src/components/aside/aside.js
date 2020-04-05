@@ -4,6 +4,8 @@ import Box from '@material-ui/core/Box';
 
 import Block from './block';
 import Recent from './recent';
+import Citation from './citation';
+import Book from './book';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -26,6 +28,12 @@ const Aside = () => {
             </Block>
             <Block title="Catégories">
                 <Recent category/>
+            </Block>
+            <Block title="Citation du jour">
+                <Citation />
+            </Block>
+            <Block title="Livre du jour">
+                <Book />
             </Block>
         </Box>
     );

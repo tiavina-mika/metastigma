@@ -6,18 +6,19 @@ import { Link } from 'react-router-dom';
 import Tags from '../blocks/tags';
 import { Typography, Button } from '@material-ui/core';
 import { primaryColor } from '../../utils/constants';
-import { slugify } from '../../utils/utils';
+import { slugify,getArticleImages } from '../../utils/utils';
 import Content from './content';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        paddingBottom: theme.spacing(6)
+        paddingBottom: theme.spacing(3)
     },
     rootNotFirst: {
-        marginTop: theme.spacing(6)
+        marginTop: theme.spacing(6),
     },
     rootNotLast: {
-        borderBottom: '1px solid #e5e5e5',
+        borderTop: '1px solid #e5e5e5',
+        paddingTop: theme.spacing(3),
     },
     title: {
         lineHeight: 1.2,
@@ -72,14 +73,13 @@ const useStyles = makeStyles(theme => ({
             color: '#fff'
         }
     }
-
 }));
 
 const Card = ({ data, index }) => {
     const classes = useStyles();
 
     return (
-        <Box className={clsx(classes.root, index? index !==0? classes.rootNotFirst: classes.rootNotLast: null)}>
+        <Box className={clsx(classes.root, index? index === 0? classes.rootNotFirst: classes.rootNotLast: null)}>
             <Box className={classes.content}>
                 <Box className={classes.titleContainer}>
                     <Typography className={classes.title} variant="h6">
@@ -92,16 +92,16 @@ const Card = ({ data, index }) => {
                     <Tags data={data} />
                 </Box>
                 { data.image && <Box className={classes.imageContainer}>
-                    <img src={`${process.env.PUBLIC_URL}/images/${data.image}`} alt={data.title} className={classes.image}/>
+                    <img src={getArticleImages(data.image)} alt={data.title} className={classes.image}/>
                 </Box> }
                 <Box className={classes.content}>
                    <Content blocks={data.content} />
                 </Box>
-                <Box className={classes.buttonContainer}>
+                { index && <Box className={classes.buttonContainer}>
                     <Button className={classes.button}>
                         Continuer la lecture
                     </Button>
-                </Box>
+                </Box> }
             </Box>
         </Box>
     );

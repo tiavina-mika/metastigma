@@ -6,7 +6,10 @@ import Title from "./title";
 
 const useStyles = makeStyles(theme => ({
     root: {
-        marginBottom: theme.spacing(8)
+        marginBottom: theme.spacing(8),
+        [theme.breakpoints.down('md')]: {
+            marginBottom: theme.spacing(3),
+        }
     },
 }));
 

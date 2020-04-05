@@ -5,7 +5,7 @@ import Routes from './routes';
 
 WebFont.load({
     google: {
-      families: ['Noto Serif', 'Proxima Nova', 'Montserrat', 'Playfair Display']
+      families: ['Bell MT', 'Palatino', 'Montserrat', 'Playfair Display', 'Franklin Gothic']
     }
 });
 

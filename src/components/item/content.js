@@ -10,7 +10,6 @@ const useStyles = makeStyles({
     text: {
         color: '#222222',
         fontFamily: 'Montserrat',
-        whiteSpace: 'pre-line',
         fontSize: 14,
         lineHeight: 1.7,
     },
