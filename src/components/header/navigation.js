@@ -1,10 +1,12 @@
 import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Box from '@material-ui/core/Box';
 
-import { navHeight } from '../../utils/constants';
+import { navHeight, primaryColor } from '../../utils/constants';
+import { useGetData } from '../../hooks/useGetData';
+import { slugify } from '../../utils/utils';
 
 const useStyles = makeStyles(theme => ({
     link: {
@@ -37,7 +39,6 @@ const useStyles = makeStyles(theme => ({
     item: {
         width: 200,
         [theme.breakpoints.up('md')]: {
-            backgroundColor: '#008cff',
             height: navHeight,
             display: 'flex',
             alignItems: 'center',
@@ -45,33 +46,40 @@ const useStyles = makeStyles(theme => ({
             color: '#fff'
         },
     },
+    activeItem: {
+        backgroundColor: primaryColor,
+        color: '#fff'
+    },
     itemMobile: {
         padding: 10,
         borderBottom: '1px solid #888888',
     }
 }));
 
-const data = [
-    {
-        link: 'Philosophie',
-        url: 'philosophie'
-    },
-    {
-        link: 'Littérature',
-        url: 'litterature'
-    },
+// const data = [
+//     {
+//         link: 'Philosophie',
+//         url: 'philosophie'
+//     },
+//     {
+//         link: 'Littérature',
+//         url: 'litterature'
+//     },
     
-]
+// ]
 
 const Navigation = ({ isMobile }) => {
     const classes = useStyles();
+    const location = useLocation();
+    const [ data ] = useGetData({ category: true })
 
     return (
         <Box className={isMobile? classes.navigationMobile: classes.navigation}>
             {data && data.map((d, i) => (
-                    <Box className={isMobile? classes.itemMobile: classes.item} key={i}>
-                        <Link className={clsx(classes.link, classes.linkInactive)}>
-                            { d.link }
+                    <Box className={clsx(isMobile? classes.itemMobile: classes.item, location.pathname.includes(d.url)? classes.activeItem: null)} key={i}>
+                    {/* <Box className={isMobile? classes.itemMobile: classes.item, location.pathname.includes(d.url)? classes.activeItem: null} key={i}> */}
+                        <Link className={clsx(classes.link, classes.linkInactive)} to={slugify(d)}>
+                            { d }
                         </Link>                        
                     </Box>
                 ))

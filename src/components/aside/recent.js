@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 
-import { items } from '../../utils/data/articles';
-import { slugify, getRecents, getCategories } from '../../utils/utils';
+import { slugify } from '../../utils/utils';
+import { useGetData } from '../../hooks/useGetData';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -30,12 +30,13 @@ const useStyles = makeStyles(theme => ({
 
 const Recent = ({ category }) => {
     const classes = useStyles();
-    const [data, setData] = useState([]);
+    // const [data, setData] = useState([]);
 
-    useEffect(() => {
-        const arr = category? [...getCategories(items)]: [...getRecents(items)];
-        setData(arr);
-    }, [category]);
+    // useEffect(() => {
+    //     const arr = category? [...getCategories(items)]: [...getRecents(items)];
+    //     setData(arr);
+    // }, [category]);
+    const [ data ] = useGetData({ category })
 
     return (
         <Box className={classes.root}>

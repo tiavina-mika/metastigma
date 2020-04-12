@@ -5,7 +5,7 @@ const Logo = () => {
 
     return (
         <Box display="flex" justifyContent="center" alignItems="center" py={5} px={3}>
-            <h1>Logo</h1>
+            <img src={`${process.env.PUBLIC_URL}/images/logo.jpg`} alt="logo" />
         </Box>
     )
 }
